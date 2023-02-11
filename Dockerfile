@@ -1,4 +1,4 @@
-FROM --platform=${TARGETPLATFORM} golang:1.19-alpine as builder
+FROM --platform=${TARGETPLATFORM} golang:1.20-alpine as builder
 
 ENV CGO_ENABLED=0
 ARG TAG
