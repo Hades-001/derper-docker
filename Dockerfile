@@ -1,4 +1,4 @@
-FROM --platform=${TARGETPLATFORM} golang:1.21-alpine as builder
+FROM --platform=${TARGETPLATFORM} golang:1.23-alpine as builder
 
 ENV CGO_ENABLED=0
 ARG TAG
@@ -15,7 +15,7 @@ RUN set -ex && \
     go build -ldflags "-s -w -X main.version=${TAG}" -trimpath -o derper && \
     setcap CAP_NET_BIND_SERVICE=+eip derper
 
-FROM --platform=${TARGETPLATFORM} alpine:3.18
+FROM --platform=${TARGETPLATFORM} alpine:3.21
 COPY --from=builder /root/tailscale/cmd/derper/derper /usr/bin/
 
 ENV DERP_ADDR               :443
